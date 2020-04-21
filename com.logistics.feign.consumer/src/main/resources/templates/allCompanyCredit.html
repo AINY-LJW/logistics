@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>所有有用户评论</title>
+
+<!-- CSS -->
+<link rel="stylesheet"
+	th:href="@{/http://fonts.googleapis.com/css?family=Roboto:400,100,300,500}">
+<link rel="stylesheet"
+	th:href="@{/static/assets/bootstrap/css/bootstrap.min.css}">
+<link rel="stylesheet"
+	th:href="@{/assets/font-awesome/css/font-awesome.min.css}">
+<link rel="stylesheet" th:href="@{/assets/css/form-elements.css}">
+<link rel="stylesheet" th:href="@{/assets/css/style.css}">
+
+<!--  easyUI-->
+<link rel="stylesheet" th:href="@{/jquery-easyui-1.4.1/themes/gray/easyui.css}">
+<link rel="stylesheet" th:href="@{/jquery-easyui-1.4.1/themes/icon.css}">
+<script type="text/javascript"
+	th:src="@{/jquery-easyui-1.4.1/locale/easyui-lang-zh_CN.js}"></script>
+<script type="text/javascript"
+	th:src="@{/js/vendor/jquery-1.11.2.min.js}"></script>
+	<script type="text/javascript"
+	th:src="@{/jquery-easyui-1.4.1/jquery.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{http://code.jquery.com/jquery-latest.js}"></script>
+	<script type="text/javascript"  th:src="@{/jquery-easyui-1.4.1/jquery.easyui.min.js}"></script>
+	<script type="text/javascript"  th:src="@{/jquery-easyui-1.4.1/easyloader.js}"></script>
+<!-- 百度api -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=TGfKNmGBxMeQrysRtjEvplqsupaHPbSv&__ec_v__=20190126"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+<!-- <script type="text/javascript">	 -->
+<!-- 百度api end -->	
+<!-- Favicon and touch icons -->
+<link rel="shortcut icon" href="static/assets/ico/favicon.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144"
+	th:href="@{/assets/ico/apple-touch-icon-144-precomposed.png}">
+<link rel="apple-touch-icon-precomposed" sizes="114x114"
+	th:href="@{/assets/ico/apple-touch-icon-114-precomposed.png}">
+<link rel="apple-touch-icon-precomposed" sizes="72x72"
+	th:href="@{/assets/ico/apple-touch-icon-72-precomposed.png}">
+<link rel="apple-touch-icon-precomposed"
+	th:href="@{/assets/ico/apple-touch-icon-57-precomposed.png}">
+
+</head>
+
+<body>
+
+	<!-- Top content -->
+	<div class="top-content">
+
+		<div class="inner-bg">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8 col-sm-offset-2 text">
+						<h1>所有公司信誉档案</h1>
+						<div class="description"></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6 col-sm-offset-3 form-box">
+						<div class="form-top" style="height: 70%">
+
+							<div class="form-top-right">
+								<i class="fa fa-key"></i>
+							</div>
+						</div>
+						<div id="tb" style="padding:3px">
+										<span>法人</span>
+										<input id="asin" style="line-height:26px;border:1px solid #ccc">
+										<span>行业:</span>
+										<input id="reviewerName" style="line-height:26px;border:1px solid #ccc">
+										<span>公司:</span>
+										<input id="keyWord" style="line-height:26px;border:1px solid #ccc">
+										<a class="easyui-linkbutton" plain="true" onclick="doSearch()" id="serach" data-options="iconCls:'icon-search'">查找</a>
+										<a class="easyui-linkbutton" plain="true" onclick="exportExcel()"
+											id="serach" data-options="iconCls:'icon-sum'">简历对比</a>
+						</div>
+						<div class="form-bottom" style="height: 70%">
+						<table id="tt" class="easyui-datagrid"
+									style="width: 100%; height: auto" url="companyCredit/getAllCompanyCredit"
+									toolbar="#tb" title="建议列表" iconCls="icon-save" 
+									rownumbers="true" pagination="true">
+									<!--  工具栏-->
+									
+									<thead>
+										<tr>
+											<th field="name" width="10%">公司名称</th>
+											<th field="grade" width="5%" formatter="formatter">信誉等级</th>
+											<th field="legalperson" width="5%" align="center">法人</th>
+											<th field="registeredcapital" width="5%" align="center">注册资金</th>
+											<th field="industry" width="10%">行业</th>
+											<th field="phone" width="7%">联系电话</th>
+											<!-- <th field="reviewtime" width="10%" formatter:formatter(value)>评论时间</th> -->
+											<th field="location" width="17%">所在地区</th>
+											<th field="products" width="17%">主营产品</th>
+											<th field="introduction" width="24%">公司简介</th>
+										</tr>
+									</thead>
+								</table>
+						<div class="table-responsive">
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 信誉档案比较对比 -->
+		<div id="compare" class="easyui-window" title="简历对比" data-options="iconCls:'icon-save',modal:true,closed:true" style="width:1000px;height:600px;padding:10px;">
+			<div id="container" style="height: 100%"></div>
+		</div>
+	</div>
+
+
+	<!-- Javascript -->
+	<script th:src="@{/assets/js/jquery-1.11.1.min.js}"></script>
+	<script th:src="@{/assets/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{/assets/js/jquery.backstretch.min.js}"></script>
+	<script th:src="@{/assets/js/scripts.js}"></script>
+	<script th:src="@{public/media/js/jquery-1.8.3.min.js}"></script>
+
+	<!--[if lt IE 10]>
+            <script src="static/assets/js/placeholder.js"></script>
+        <![endif]-->
+</body>
+
+<script th:inline="javascript">
+
+
+	//用户搜索时触发
+	function doSearch(){
+		 $('#tt').datagrid('load',{
+		//当所有代码执行完之后，当前表格会自动提交一份带参数的去后台
+		asin: $('#asin').val(),
+		reviewerName: $('#reviewerName').val(),
+		keyWord: $('#keyWord').val(),
+		
+		});  
+	}
+
+	function formatter(value,row){
+		if (!value || typeof value !== 'string') {
+			return '未知'
+		}
+		if(value === '1'){
+			return '优秀'
+		}else if (value === '2'){
+			return '良好'
+		}else if(value === '3'){
+			return '<span style="color:red;">极差</span>';
+		}else {
+			return '未知'
+		}
+	}
+	
+	//对比数据
+	function exportExcel(){
+		//$('#tt').datagrid('toExcel','dg.xls');	// export to excel
+		$('#compare').window('open')
+		// chul 处理表格数据进行对比展示
+		
+		var data = []
+		var dataGrade = []
+		var dataRegisteredcapital = []
+		var rows = $("#tt").datagrid("getRows"); 
+		for(var i=0;i<rows.length;i++){
+		    console.log(rows[i].gender);
+		    data.push(rows[i].name);
+		    dataGrade.push(rows[i].grade);
+		    dataRegisteredcapital.push(rows[i].registeredcapital);
+		}
+		this.compareData(data,dataGrade,dataRegisteredcapital)
+	}
+	// 比较数据
+ 	function compareData(data,dataGrade,dataRegisteredcapital){
+		var dom = document.getElementById("container");
+		var myChart = echarts.init(dom);
+		var app = {};
+		option = null;
+		var posList = [
+		    'left', 'right', 'top', 'bottom',
+		    'inside',
+		    'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+		    'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+		];
+
+		app.configParameters = {
+		    rotate: {
+		        min: -90,
+		        max: 90
+		    },
+		    align: {
+		        options: {
+		            left: 'left',
+		            center: 'center',
+		            right: 'right'
+		        }
+		    },
+		    verticalAlign: {
+		        options: {
+		            top: 'top',
+		            middle: 'middle',
+		            bottom: 'bottom'
+		        }
+		    },
+		    position: {
+		        options: echarts.util.reduce(posList, function (map, pos) {
+		            map[pos] = pos;
+		            return map;
+		        }, {})
+		    },
+		    distance: {
+		        min: 0,
+		        max: 100
+		    }
+		};
+
+		app.config = {
+		    rotate: 90,
+		    align: 'left',
+		    verticalAlign: 'middle',
+		    position: 'insideBottom',
+		    distance: 15,
+		    onChange: function () {
+		        var labelOption = {
+		            normal: {
+		                rotate: app.config.rotate,
+		                align: app.config.align,
+		                verticalAlign: app.config.verticalAlign,
+		                position: app.config.position,
+		                distance: app.config.distance
+		            }
+		        };
+		        myChart.setOption({
+		            series: [{
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }, {
+		                label: labelOption
+		            }]
+		        });
+		    }
+		};
+
+
+		var labelOption = {
+		    show: true,
+		    position: app.config.position,
+		    distance: app.config.distance,
+		    align: app.config.align,
+		    verticalAlign: app.config.verticalAlign,
+		    rotate: app.config.rotate,
+		    formatter: '{c}  {name|{a}}',
+		    fontSize: 16,
+		    rich: {
+		        name: {
+		            textBorderColor: '#fff'
+		        }
+		    }
+		};
+
+		option = {
+		    color: ['#003366', '#006699', '#4cabce', '#e5323e'],
+		    tooltip: {
+		        trigger: 'axis',
+		        axisPointer: {
+		            type: 'shadow'
+		        }
+		    },
+		    legend: {
+		        data: ['信誉等级', '注册资金']
+		    },
+		    toolbox: {
+		        show: true,
+		        orient: 'vertical',
+		        left: 'right',
+		        top: 'center',
+		        feature: {
+		            mark: {show: true},
+		            dataView: {show: true, readOnly: false},
+		            magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+		            restore: {show: true},
+		            saveAsImage: {show: true}
+		        }
+		    },
+		    xAxis: [
+		        {
+		            type: 'category',
+		            axisTick: {show: false},
+		            // TODO
+		            //data: ['', '', '', '', '']
+		            data: data
+		        }
+		    ],
+		    yAxis: [
+		        {
+		            type: 'value'
+		        }
+		    ],
+		    // TODO
+		    series: [
+		        {
+		            name: '信誉等级',
+		            type: 'bar',
+		            barGap: 0,
+		            label: labelOption,
+		            data: dataGrade
+		            //data: [320, 332, 301, 334, 390]
+		        },
+		        {
+		            name: '注册资金',
+		            type: 'bar',
+		            label: labelOption,
+		            data: dataRegisteredcapital
+		            //data: [220, 182, 191, 234, 290]
+		        }
+		       
+		    ]
+		};;
+		if (option && typeof option === "object") {
+		    myChart.setOption(option, true);
+		}
+	} 
+
+</script>
+
+</html>

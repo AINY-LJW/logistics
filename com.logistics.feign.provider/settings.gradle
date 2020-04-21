@@ -1,0 +1,2 @@
+rootProject.name = 'com.logistics.feign.provider'
+//includeFlat 'com.logistics.common'

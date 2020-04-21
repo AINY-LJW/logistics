@@ -1,0 +1,15 @@
+#服务端口
+server:
+  port: 8808
+#Eureka 服务端信息  
+#register-with-eureka 表示是否讲自己注册到 Eureka Server， 默认为true。 由于当前工程就是Eureka Server所以设置成false。
+#fetch-registry 表示是否从其他 Eureka Server 获取注册信息，默认true。由于本例中仅示范建一个单节点服务，所以暂设置为false，不同步其他Eureka Server注册信息。
+#service-url.defaultZone 设置与 Eureka Server 交互的地址，查询和注册服务都需要依赖这个地址。 多个地址可使用英文逗号（,）隔开。
+eureka: 
+  client:  
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:8808/eureka 
+#不加这句话可能Eureka主页不能正常显示
+spring.freemarker.prefer-file-system-access: false

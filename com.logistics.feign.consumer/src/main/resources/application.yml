@@ -1,0 +1,38 @@
+#服务端口
+server:
+  port: 8802
+  
+#开放信息
+info:
+  app:
+    name: 物流最优路径规划平台消费端
+    version: 1.0 
+#Eureka配置信息
+spring:
+  main:
+      allow-bean-definition-overriding: true #允许重复注册
+#  devtools:
+# 取消自动刷新UI页面
+#    livereload: 
+#      enabled: false
+#     禁用重新启动
+#    restart: 
+#      enabled: true
+  thymeleaf:
+#  生产环境设置为true 开发环境设置为false
+    cache: false
+  application:
+    name: logistics-consument
+eureka:
+  client:
+    service-url:
+#   注册机地址
+# instance.prefer-ip-address 表示将自己的IP注册到 Eureka Server， 
+#若不配置该属性，或者设置为false，则标识注册所在操作系统的hostname到 Eureka Server。
+      defaultZone: http://localhost:8808/eureka
+  instance:
+    prefer-ip-address: true 
+ #开启hystrix容错管理
+feign: 
+  hystrix: 
+    enabled: true

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)https://lbs.baidu.com/jsdemo/demo/webgl6_1.htm -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<style type="text/css">
+	body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+	</style>
+	<script type="text/javascript" th:src="@{baidu/api}"></script><script type="text/javascript" src="./视角动画_files/getscript"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{baidu/bmap.css}">
+    <script type="text/javascript" th:src="@{baidu/TrackAnimation_min.js.下载}"></script>
+    <title>视角动画</title>
+</head>
+<body>
+	<div id="allmap" style="overflow: hidden; position: relative; background-image: url(&quot;//webmap0.bdimg.com/image/api/bg.png&quot;); text-align: left; touch-action: none;" class=" bmap-container">
+	<div id="platform" style="overflow: visible; position: absolute; z-index: 5; left: 0px; top: 0px; cursor: url(&quot;//webmap0.bdimg.com/image/api/openhand.cur&quot;) 8 8, default;">
+	<div id="mask" class=" BMap_mask" style="position: absolute; left: 0px; top: 0px; z-index: 9; overflow: hidden; user-select: none; width: 1536px; height: 682px; opacity: 0; background: rgb(0, 0, 0); transition: opacity 0.4s ease 0s;"></div>
+	<div style="position: absolute; height: 0px; width: 0px; left: 0px; top: 0px; z-index: 200;">
+	<div style="position: absolute; height: 0px; width: 0px; left: 0px; top: 0px; z-index: 800;"></div>
+	<div style="position: absolute; height: 0px; width: 0px; left: 0px; top: 0px; z-index: 700;"></div>
+	<div style="position: absolute; height: 0px; width: 0px; left: 0px; top: 0px; z-index: 600;"></div>
+	<div style="position: absolute; height: 0px; width: 0px; left: 0px; top: 0px; z-index: 500;"></div>
+	<div style="position: absolute; height: 0px; width: 0px; left: 0px; top: 0px; z-index: 400;">
+	</div>
+	</div></div>
+	<div class="click-ripple-container">
+	<div class="click-ripple"></div>
+	</div><div class=" anchorBL" style="position: absolute; z-index: 10; bottom: 15px; right: auto; top: auto; left: 5px;">
+	<canvas width="1920" height="853" style="position: absolute; left: 0px; top: 0px; width: 1536px; height: 682px; z-index: 0;"></canvas>
+	<div unselectable="on" class=" BMap_cpyCtrl anchorBL" style="cursor: default; white-space: nowrap; text-size-adjust: none; bottom: 2px; right: auto; top: auto; left: 2px; position: absolute; z-index: 10;">
+	<span _cid="1" style="display: block;">
+	<span style="background: rgba(255, 255, 255, 0.701961);padding: 0px 1px;line-height: 16px;display: inline;height: 16px;">©&nbsp;2020 Baidu - GS(2019)5218号 - 甲测资字1100930 - 京ICP证030173号 - Data © 长地万方</span>
+	</span></div></div>
+
+
+<script type="text/javascript">
+    // GL版命名空间为BMapGL
+    // 按住鼠标右键，修改倾斜角和角度
+	var bmap = new BMapGL.Map("allmap");    // 创建Map实例
+	bmap.centerAndZoom(new BMapGL.Point(116.297611, 40.047363), 17);  // 初始化地图,设置中心点坐标和地图级别
+    bmap.enableScrollWheelZoom(true);     // 开启鼠标滚轮缩放
+    var path = [{
+        'lng': 116.297611,
+        'lat': 40.047363
+    }, {
+    	'lng': 117.302839,
+    	'lat': 50.048219
+    }, {
+    	'lng': 118.308301,
+    	'lat': 39.050566
+    }, 
+    /* {
+    	'lng': 119.305732,
+    	'lat': 60.054957
+    }, 
+    {
+    	'lng': 120.304754,
+    	'lat': 40.057953
+    }, {
+    	'lng': 126.306487,
+    	'lat': 40.058312
+    }, {
+    	'lng': 136.307223,
+    	'lat': 40.056379
+    } */
+    ];
+    var point = [];
+    for (var i = 0; i < path.length; i++) {
+        point.push(new BMapGL.Point(path[i].lng, path[i].lat));
+    }
+    var pl = new BMapGL.Polyline(point);
+    setTimeout('start()', 3000);
+    function start () {
+        trackAni = new BMapGLLib.TrackAnimation(bmap, pl, {
+        	//是否在动画结束后总览视图缩放（调整地图到能看到整个轨迹的视野），默认开启
+            overallView: true,
+            // 设置动画中的地图倾斜角度，默认55度
+            tilt: 30,
+            // 动画持续时常，单位ms
+            duration: 2000,
+            delay: 300
+        });
+        trackAni.start();
+    }
+</script>
+</body></html>
