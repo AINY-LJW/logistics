@@ -55,6 +55,19 @@ public class CommentFeignClientFallback implements FallbackFactory<UserFeignClie
 				// TODO Auto-generated method stub
 				return null;
 			}
+
+			@Override
+			public R getAll() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public EasyUIDataGridResult getAllProducts(int pageNum, int pageSize, String name, String classtype,
+					String place, String other) {
+				logger.error("获取农产品异常");
+				return null;
+			}
 		};
 	}
 

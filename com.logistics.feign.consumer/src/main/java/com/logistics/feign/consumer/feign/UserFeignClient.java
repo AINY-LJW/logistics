@@ -23,8 +23,21 @@ import com.logistics.util.R;
 //@Component
 @FeignClient(name="logistics-provider",fallbackFactory = CommentFeignClientFallback.class)
 public interface UserFeignClient {
+	/**=====================================路径规划==========================================*/
+	/**
+	 * 所有坐标
+	 * TODO
+	 * @param 
+	 * @return R
+	 */
+	@PostMapping("/planRote/getall")
+	public R getAll() ;
 	/**=====================================以下农产品增删改查==========================================*/
-	
+	@PostMapping("product/getall")
+	EasyUIDataGridResult getAllProducts(@RequestBody @RequestParam("page") int pageNum,
+			@RequestParam("rows") int pageSize, @RequestParam(value = "asin", required = false) String name,
+			@RequestParam(value = "reviewerName", required = false) String classtype,
+			@RequestParam(value = "keyWord", required = false) String place, @RequestParam("identity") String other) ;
 	/**
 	 * 返回json数据做词云图
 	 * 

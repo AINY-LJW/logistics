@@ -41,7 +41,7 @@ public class UserController {
 		}
 	}
 	/**
-	 * 普通用户（因为没有应聘者账号数据  所以用这个）
+	 * 普通用户
 	 * TODO
 	 * @param 
 	 * @return User

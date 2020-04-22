@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class PageController {
 	@Autowired
 	private HttpServletRequest request;
-	/**=======================================以下公司信誉档案相关=================================*/
+	/**=======================================以下农产品相关=================================*/
 	/**
 	 * 物流配送最优路径
 	 * TODO
@@ -34,9 +34,9 @@ public class PageController {
 	 * @param 
 	 * @return String
 	 */
-	@RequestMapping(value = "allCompanyCredit", method = RequestMethod.GET)
+	@RequestMapping(value = "allProduct", method = RequestMethod.GET)
 	public String showAllCompanyCreditPage(Model model) {
-		return "allCompanyCredit.html";
+		return "allProduct.html";
 	}
 	/**=======================================以下简历相关=================================*/
 	/**
