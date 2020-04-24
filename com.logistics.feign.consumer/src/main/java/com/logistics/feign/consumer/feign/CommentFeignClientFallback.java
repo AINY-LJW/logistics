@@ -68,6 +68,13 @@ public class CommentFeignClientFallback implements FallbackFactory<UserFeignClie
 				logger.error("获取农产品异常");
 				return null;
 			}
+
+			@Override
+			public EasyUIDataGridResult getAllOrder(int pageNum, int pageSize, String name, String issend, String place,
+					String isend) {
+				logger.error("获取订单异常");
+				return null;
+			}
 		};
 	}
 

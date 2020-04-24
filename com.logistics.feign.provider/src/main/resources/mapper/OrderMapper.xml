@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.logistics.feign.provider.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.logistics.feign.provider.domain.Order" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="coorid" property="coorid" jdbcType="VARCHAR" />
+    <result column="pid" property="pid" jdbcType="VARCHAR" />
+    <result column="place" property="place" jdbcType="VARCHAR" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="sendTime" property="sendtime" jdbcType="TIMESTAMP" />
+    <result column="endflag" property="endflag" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, coorid, pid, place, money, createtime, sendTime, endflag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.logistics.feign.provider.domain.OrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from order
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from order
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.logistics.feign.provider.domain.OrderExample" >
+    delete from order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.logistics.feign.provider.domain.Order" >
+    insert into order (id, coorid, pid, 
+      place, money, createtime, 
+      sendTime, endflag)
+    values (#{id,jdbcType=VARCHAR}, #{coorid,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, 
+      #{place,jdbcType=VARCHAR}, #{money,jdbcType=DECIMAL}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{sendtime,jdbcType=TIMESTAMP}, #{endflag,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.logistics.feign.provider.domain.Order" >
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="coorid != null" >
+        coorid,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="place != null" >
+        place,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="sendtime != null" >
+        sendTime,
+      </if>
+      <if test="endflag != null" >
+        endflag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="coorid != null" >
+        #{coorid,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null" >
+        #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendtime != null" >
+        #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endflag != null" >
+        #{endflag,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.logistics.feign.provider.domain.OrderExample" resultType="java.lang.Integer" >
+    select count(*) from order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update order
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coorid != null" >
+        coorid = #{record.coorid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pid != null" >
+        pid = #{record.pid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.place != null" >
+        place = #{record.place,jdbcType=VARCHAR},
+      </if>
+      <if test="record.money != null" >
+        money = #{record.money,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createtime != null" >
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sendtime != null" >
+        sendTime = #{record.sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endflag != null" >
+        endflag = #{record.endflag,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update order
+    set id = #{record.id,jdbcType=VARCHAR},
+      coorid = #{record.coorid,jdbcType=VARCHAR},
+      pid = #{record.pid,jdbcType=VARCHAR},
+      place = #{record.place,jdbcType=VARCHAR},
+      money = #{record.money,jdbcType=DECIMAL},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      sendTime = #{record.sendtime,jdbcType=TIMESTAMP},
+      endflag = #{record.endflag,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.logistics.feign.provider.domain.Order" >
+    update order
+    <set >
+      <if test="coorid != null" >
+        coorid = #{coorid,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="place != null" >
+        place = #{place,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendtime != null" >
+        sendTime = #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endflag != null" >
+        endflag = #{endflag,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.logistics.feign.provider.domain.Order" >
+    update order
+    set coorid = #{coorid,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=VARCHAR},
+      place = #{place,jdbcType=VARCHAR},
+      money = #{money,jdbcType=DECIMAL},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      sendTime = #{sendtime,jdbcType=TIMESTAMP},
+      endflag = #{endflag,jdbcType=TINYINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
