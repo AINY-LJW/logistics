@@ -1,5 +1,7 @@
 package com.logistics.feign.consumer.feign;
 
+import java.util.Map;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +17,7 @@ import com.logistics.util.R;
  * 简述部分: * Feign接口，并增加 @FeignClient(name="service-user") 注解用以适应Eureka和Ribbon，
  * 里面的方法是和服务端提供的接口对应的
  *
- * @author WK
+ * @author helantian
  * @version 2020年1月23日
  */
 //注解里面写你在  Eureka注册的提供服务者的名字
@@ -44,6 +46,15 @@ public interface UserFeignClient {
 	 */
 	@PostMapping("/planRote/getall")
 	public R getAll() ;
+	/**
+	 * 规划
+	 * TODO
+	 * @param 
+	 * @return R
+	 */
+	@PostMapping("/planRote/getPlanList")
+	public R getPlanList(@RequestBody Map<String, Object> datas);
+	
 	/**=====================================以下农产品增删改查==========================================*/
 	@PostMapping("product/getall")
 	EasyUIDataGridResult getAllProducts(@RequestBody @RequestParam("page") int pageNum,

@@ -10,10 +10,10 @@ import com.logistics.util.EasyUIDataGridResult;
  * 
  * 简述部分: 订单Service
  * 
- * Copyright: 版权所有 (c) JOIN-CHEER
- * Company: 久其
+ * 
+ * 
  *
- * @author lijiawen
+ * @author helantian
  * @version 2020年4月23日
  */
 public interface OrderService {

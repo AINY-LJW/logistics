@@ -11,7 +11,7 @@ import com.logistics.feign.provider.domain.CoordinateDomain;
  * 
  * 简述部分:坐标
  * 
- * @author lijiawen
+ * @author helantian
  * @version 2020年4月21日
  */
 @Mapper

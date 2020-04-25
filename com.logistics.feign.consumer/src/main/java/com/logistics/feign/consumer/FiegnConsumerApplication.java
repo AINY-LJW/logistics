@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 /**
  * 
  * <p>TODO 启动类</p>
- * @author lijiawen
+ * @author helantian
  * @version 2020年2月6日
  */
 @SpringBootApplication

@@ -175,7 +175,7 @@ body, html, #allmap {
 					dataType : 'json', //返回的数据格式：json/xml/html/script/jsonp/text
 					success : function(data) {
 						//var path = data.objs
-						var path = data.datas.datas
+						var path = data.datas
 						console.log(path)
 						var point = [];
 						for (var i = 0; i < path.length; i++) {

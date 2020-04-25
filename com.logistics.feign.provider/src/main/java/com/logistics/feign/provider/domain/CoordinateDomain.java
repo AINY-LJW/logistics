@@ -4,7 +4,7 @@ package com.logistics.feign.provider.domain;
  * 
  * 简述部分: 坐标位置
  *
- * @author lijiawen
+ * @author helantian
  * @version 2020年4月21日
  */
 public class CoordinateDomain {

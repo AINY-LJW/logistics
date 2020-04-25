@@ -3,7 +3,7 @@ package com.logistics.common.domain;
  * 
  * 简述部分: 管理员
  *
- * @author lijiawen
+ * @author helantian
  * @version 2020年4月21日
  */
 public class User {

@@ -1,5 +1,7 @@
 package com.logistics.feign.consumer.feign;
 
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -15,7 +17,7 @@ import feign.hystrix.FallbackFactory;
  *
  * <p>Copyright: 版权所有 (c) 2002 - 2008<br>
  *
- * @author lijiawen
+ * @author helantian
  * @version 2019年1月21日
  */
 @Component
@@ -73,6 +75,12 @@ public class CommentFeignClientFallback implements FallbackFactory<UserFeignClie
 			public EasyUIDataGridResult getAllOrder(int pageNum, int pageSize, String name, String issend, String place,
 					String isend) {
 				logger.error("获取订单异常");
+				return null;
+			}
+
+			@Override
+			public R getPlanList(Map<String, Object> datas) {
+				logger.error("规划路线失败");
 				return null;
 			}
 		};

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  * 拦截器配置类是为了配置拦截器的使用,可以配置多个拦截器注入即可
  * <p>TODO 类描述</p>
  *
- * @author lijiawen
+ * @author helantian
  * @version 2019年2月20日
  */
 @SuppressWarnings("deprecation")

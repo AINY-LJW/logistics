@@ -6,7 +6,7 @@ import java.util.Map;
  * 
  * 简述部分:RestFul返回前端消息类
  *
- * @author WK
+ * @author helantian
  * @version 2020年1月18日
  */
 public class R extends HashMap<String, Object> {

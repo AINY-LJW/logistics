@@ -7,7 +7,7 @@ import com.logistics.util.EasyUIDataGridResult;
  * 简述部分:农产品service
  * 
  *
- * @author lijiawen
+ * @author helantian
  * @version 2020年4月22日
  */
 public interface ProductService {

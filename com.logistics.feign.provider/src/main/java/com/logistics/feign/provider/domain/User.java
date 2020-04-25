@@ -3,7 +3,7 @@ package com.logistics.feign.provider.domain;
  * 
  * 简述部分:管理员实体类
  *
- * @author lijiawen
+ * @author helantian
  * @version 2020年1月17日
  */
 public class User {

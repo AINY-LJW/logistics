@@ -16,7 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
  * 简述部分:
  * 
  *
- * @author WK
+ * @author helantian
  * @version 2020年1月17日
  */
 public class FeignProviderApplication {

@@ -18,7 +18,7 @@ import com.logistics.feign.provider.domain.UserExample.Criteria;
  * 
  * 简述部分:用户
  *
- * @author WK
+ * @author helantian
  * @version 2020年1月17日
  */
 @RestController

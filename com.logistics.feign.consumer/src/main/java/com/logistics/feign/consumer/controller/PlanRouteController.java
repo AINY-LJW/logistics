@@ -1,10 +1,8 @@
 package com.logistics.feign.consumer.controller;
 
 
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,8 +26,6 @@ public class PlanRouteController {
 	
 	@PostMapping("/getPlanList")
 	public R getPlanList(@RequestBody Map<String, Object> datas) {
-		R r= R.ok() ;
-		r.put("datas", datas);
-		return r;
+		return userFeignClient.getPlanList(datas);
 	}
 }
