@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.logistics.feign.provider.service.CoordinateService;
+import com.logistics.feign.provider.util.GeneticAlgorithmPlanRoute;
 import com.logistics.feign.provider.util.GreedyPlanRoute;
 import com.logistics.util.R;
 /**
@@ -59,12 +60,14 @@ public class PlanRouteController {
 		R r= R.ok() ;
 		@SuppressWarnings("unchecked")
 		List<Map<String, Double>> list = (List<Map<String, Double>>) datas.get("datas");
+		List<Map<String, Double>> readData;
 		Map<String, Double> map = new HashMap<String, Double>();
 		map.put("lat", 41.04736312121212);
 		map.put("lng", 118.29761111111111);
 		// 仓库坐标  模拟		
 		list.add(0, map);
-		
+		if(list.size() > 10) {
+			
 //		Collections.sort(list, new Comparator<Map<String, Double>>() {  
 //			@Override
 //			public int compare(Map<String, Double> o1, Map<String, Double> o2) {
@@ -72,9 +75,18 @@ public class PlanRouteController {
 //				return 0;
 //			}  
 //        });  
-		GreedyPlanRoute tsp=new GreedyPlanRoute();
-		List<Map<String, Double>> readData = tsp.readData(list);
-		r.put("datas", readData);
-		return r;
+			GreedyPlanRoute tsp=new GreedyPlanRoute();
+			readData = tsp.readData(list);
+			
+		}else {
+			GeneticAlgorithmPlanRoute gen = new GeneticAlgorithmPlanRoute();
+			readData = gen.getPlanRote(list);
+		}
+		if(readData != null && readData.size() > 0) {
+			r.put("datas", readData);
+			return r;
+		}else {
+			return R.error("路径规划失败");
+		}
 	}
 }
