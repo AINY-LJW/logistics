@@ -62,8 +62,8 @@ public class PlanRouteController {
 		List<Map<String, Double>> list = (List<Map<String, Double>>) datas.get("datas");
 		List<Map<String, Double>> readData;
 		Map<String, Double> map = new HashMap<String, Double>();
-		map.put("lat", 41.04736312121212);
-		map.put("lng", 118.29761111111111);
+		map.put("lat", 43.887223);
+		map.put("lng", 125.3243);
 		// 仓库坐标  模拟		
 		list.add(0, map);
 		if(list.size() > 10) {
