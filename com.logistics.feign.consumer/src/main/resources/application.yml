@@ -36,3 +36,12 @@ eureka:
 feign: 
   hystrix: 
     enabled: true
+#    超时异常关闭
+    command: 
+      default: 
+        execution:
+          timeout: 
+            enabled: false 
+          isolation: 
+            thread: 
+              timeoutInMilliseconds: 300000
