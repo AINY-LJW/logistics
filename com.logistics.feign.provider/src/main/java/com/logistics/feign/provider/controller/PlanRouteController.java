@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.logistics.feign.provider.service.CoordinateService;
+import com.logistics.feign.provider.util.BdPlan;
 import com.logistics.feign.provider.util.GeneticAlgorithmPlanRoute;
 import com.logistics.feign.provider.util.GreedyPlanRoute;
 import com.logistics.util.R;
@@ -62,8 +63,10 @@ public class PlanRouteController {
 		List<Map<String, Double>> list = (List<Map<String, Double>>) datas.get("datas");
 		List<Map<String, Double>> readData;
 		Map<String, Double> map = new HashMap<String, Double>();
-		map.put("lat", 43.887223);
-		map.put("lng", 125.3243);
+		// 40.056878,116.30815
+		// 西直门 116.36001,39.947538
+		map.put("lat", 39.947538);
+		map.put("lng", 116.36001);
 		// 仓库坐标  模拟		
 		list.add(0, map);
 		if(list.size() > 10) {
@@ -83,7 +86,9 @@ public class PlanRouteController {
 			readData = gen.getPlanRote(list);
 		}
 		if(readData != null && readData.size() > 0) {
-			r.put("datas", readData);
+			List<Map<String, Double>> plan = BdPlan.getPlan(readData);
+			r.put("datas", plan);
+			r.put("ss", readData);
 			return r;
 		}else {
 			return R.error("路径规划失败");
