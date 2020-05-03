@@ -35,13 +35,20 @@ eureka:
  #开启hystrix容错管理
 feign: 
   hystrix: 
-    enabled: true
+    enabled: false
+  client: 
+    config: 
+      default:
+        connectTimeout: 500000
+        readTimeout: 500000
+        loggerLevel: basic
 #    超时异常关闭
-    command: 
-      default: 
-        execution:
-          timeout: 
-            enabled: false 
-          isolation: 
-            thread: 
-              timeoutInMilliseconds: 300000
+hystrix:
+  command: 
+    default:
+      execution:
+        timeout:
+          enabled: false
+          isolation:
+            thread:
+              timeoutInMilliseconds: 5000

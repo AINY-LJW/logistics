@@ -25,6 +25,7 @@ public class CommentFeignClientFallback implements FallbackFactory<UserFeignClie
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Override
 	public UserFeignClient create(Throwable cause) {
+		logger.error("调用失败"+cause.getMessage().toString());
 		return new UserFeignClient() {
 
 			@Override

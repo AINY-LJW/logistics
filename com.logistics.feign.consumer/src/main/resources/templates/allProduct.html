@@ -115,7 +115,7 @@
 			</div>
 		</div>
 		<!-- 信誉档案比较对比 -->
-		<div id="compare" class="easyui-window" title="简历对比" data-options="iconCls:'icon-save',modal:true,closed:true" style="width:1000px;height:600px;padding:10px;">
+		<div id="compare" class="easyui-window" title="价格对比" data-options="iconCls:'icon-save',modal:true,closed:true" style="width:1000px;height:600px;padding:10px;">
 			<div id="container" style="height: 100%"></div>
 		</div>
 	</div>
@@ -161,8 +161,8 @@
 		for(var i=0;i<rows.length;i++){
 		    console.log(rows[i].gender);
 		    data.push(rows[i].name);
-		    dataGrade.push(rows[i].grade);
-		    dataRegisteredcapital.push(rows[i].registeredcapital);
+		    dataGrade.push(rows[i].price);
+		    dataRegisteredcapital.push(rows[i].buyprice);
 		}
 		this.compareData(data,dataGrade,dataRegisteredcapital)
 	}
@@ -266,7 +266,7 @@
 		        }
 		    },
 		    legend: {
-		        data: ['信誉等级', '注册资金']
+		        data: ['售价', '进价']
 		    },
 		    toolbox: {
 		        show: true,
@@ -298,7 +298,7 @@
 		    // TODO
 		    series: [
 		        {
-		            name: '信誉等级',
+		            name: '售价',
 		            type: 'bar',
 		            barGap: 0,
 		            label: labelOption,
@@ -306,7 +306,7 @@
 		            //data: [320, 332, 301, 334, 390]
 		        },
 		        {
-		            name: '注册资金',
+		            name: '进价',
 		            type: 'bar',
 		            label: labelOption,
 		            data: dataRegisteredcapital

@@ -10,6 +10,7 @@ import com.alibaba.fastjson.JSONObject;
 
 
 public class MainRun {
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		Map<String, String> params = new HashMap<>();
 		// 起点 纬度,经度
