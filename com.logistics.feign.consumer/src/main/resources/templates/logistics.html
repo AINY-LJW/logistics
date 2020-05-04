@@ -188,6 +188,7 @@ body, html, #allmap {
 						
 						let ss = data.ss
 						let markers = [];
+						let rows = $("#tt").datagrid("getChecked");
 						for (var i = 0; i < ss.length; i++) {
 							let point1 = new BMapGL.Point(ss[i].lng,ss[i].lat)
 							// 添加点
@@ -200,7 +201,36 @@ body, html, #allmap {
 									  position : point1,    // 指定文本标注所在的地理位置
 									  offset   : new BMapGL.Size(30, -30)    //设置文本偏移量
 									}
-							let label = new BMapGL.Label((i===0 || i=== ss.length-1)?"仓库" : "客户", opts);
+							// 设置展示文字
+							if(i===0 ){
+								let label = new BMapGL.Label("仓库", opts);
+								label.setStyle({
+									color : 'red',
+									fontSize : '12px',
+									height : '20px',
+									lineHeight : '20px',
+									fontFamily: '微软雅黑'
+								});
+								bmap.addOverlay(label) 
+							} else if (i !== ss.length-1){
+								
+								$.each(rows, function(index, item){
+									if (item.latitude === ss[i].lat && item.longitude === ss[i].lng) {
+										let label = new BMapGL.Label((i===0 || i=== ss.length-1)?"仓库" : ("客户" + item.place), opts);
+										label.setStyle({
+											color : 'red',
+											fontSize : '12px',
+											height : '20px',
+											lineHeight : '20px',
+											fontFamily: '微软雅黑'
+										});
+										bmap.addOverlay(label) 
+									}
+							    });
+							}
+							
+							
+							/* let label = new BMapGL.Label((i===0 || i=== ss.length-1)?"仓库" : "客户", opts);
 							label.setStyle({
 								color : 'red',
 								fontSize : '12px',
@@ -211,7 +241,7 @@ body, html, #allmap {
 							
 							bmap.addOverlay(
 									label
-									)
+									) */
 						}
 						
 						
@@ -222,7 +252,6 @@ body, html, #allmap {
 									path[i].lat));
 							//if ( i === 10) break
 						}
-						console.log(point)
 						let pl = new BMapGL.Polyline(point);
 						trackAni = new BMapGLLib.TrackAnimation(bmap, pl, {
 							//是否在动画结束后总览视图缩放（调整地图到能看到整个轨迹的视野），默认开启
