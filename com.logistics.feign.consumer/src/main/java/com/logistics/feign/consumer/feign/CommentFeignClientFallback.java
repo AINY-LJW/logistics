@@ -84,6 +84,12 @@ public class CommentFeignClientFallback implements FallbackFactory<UserFeignClie
 				logger.error("规划路线失败");
 				return null;
 			}
+
+			@Override
+			public R changePwd(String name, String pwd) {
+				// TODO Auto-generated method stub
+				return null;
+			}
 		};
 	}
 

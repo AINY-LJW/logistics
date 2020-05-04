@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 import com.logistics.feign.provider.domain.User;
 import com.logistics.feign.provider.domain.UserExample;
@@ -30,4 +31,7 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+    
+    @Update("UPDATE USER SET PASSWORD = #{password} WHERE PHONE_NUMBER = #{phoneNumber}")
+    int updateUserPwd(User record) ;
 }

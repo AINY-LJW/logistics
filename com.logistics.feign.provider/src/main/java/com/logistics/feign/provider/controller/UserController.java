@@ -13,6 +13,7 @@ import com.logistics.feign.provider.dao.UserMapper;
 import com.logistics.feign.provider.domain.User;
 import com.logistics.feign.provider.domain.UserExample;
 import com.logistics.feign.provider.domain.UserExample.Criteria;
+import com.logistics.util.R;
 
 /**
  * 
@@ -39,6 +40,24 @@ public class UserController {
 		}else {
 			return null;
 		}
+	}
+	@PostMapping(value = "/user/changePwd")
+	public R changePwd(@RequestBody @RequestParam("phone") String name,@RequestParam("pwd") String pwd) {
+		
+		User record = new User();
+		try {
+			record.setPhoneNumber(name);
+			record.setPassword(pwd);
+			if(mapper.updateUserPwd(record ) != 0) {
+				return R.ok();
+			}
+			return R.error("数据发生变化");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return R.error("发生异常");
+		}
+		
 	}
 	/**
 	 * 普通用户

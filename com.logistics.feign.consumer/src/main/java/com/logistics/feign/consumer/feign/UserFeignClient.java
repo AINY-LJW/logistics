@@ -91,7 +91,9 @@ public interface UserFeignClient {
 	@PostMapping(value = "/user/loginForm")
 	public User ifUserExist(@RequestBody @RequestParam("form-username") String name,
 			@RequestParam("form-password") String pwd,@RequestParam("form-identity") String identity);
-
+	
+	@PostMapping(value = "/user/changePwd")
+	public R changePwd(@RequestBody @RequestParam("phone") String name,@RequestParam("pwd") String pwd);
 	/**
 	 * 返回json数据做词云图
 	 * 

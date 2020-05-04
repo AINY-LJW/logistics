@@ -132,6 +132,7 @@
                            <!--  <li><a href=""><i class="icon-lock"></i> 修改密码</a></li> -->
                             <!-- <li><a onclick="exit()" id="exitLogin"><i class="icon-key"></i> 退出</a></li> -->
                       		<li><a th:href="@{exit}" >退出</a></li>
+                      		<li><a onclick="changePwd()">修改密码</a></li>
                             
                         </ul>
                     </li>
@@ -331,8 +332,34 @@
                 <button type="button" data-dismiss="modal" class="btn green">关闭会话</button>
             </div>
         </div>
+       
         <!-- === -->
     </div>
+     <!-- 修改密码 -->
+     <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">密码修改</h4>
+	      </div>
+	      <div class="modal-body">
+	        <div class="input-group">
+			  <span class="input-group-addon" >手机号</span>
+			  <input type="text" class="form-control" id="phone" placeholder="Username" disabled th:value="${session.loginUser.phoneNumber}" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group">
+			  <span class="input-group-addon" >密码</span>
+			  <input type="text" class="form-control" id="pwd" placeholder="请输入修改后的密码" aria-describedby="basic-addon1">
+			</div>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	        <button type="button" class="btn btn-primary" onclick="OkPwd()">确定</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
     <!-- END CONTAINER -->
     <!-- BEGIN FOOTER -->
     <!-- END FOOTER -->
@@ -343,27 +370,48 @@
     <script src="public/media/js/jquery.upload.js"></script>
     <!--     <script src="/media/js/jquery.rotate.min.js"></script> -->
     <script src="public/swiper/dist/js/swiper.min.js"></script>
-    <script  th:src="@{/assets/js/jquery-1.11.1.min.js}"></script>
+    <script th:src="@{public/media/js/jquery-1.8.3.min.js}"></script>
     
     <script >
   /*   $("#exitLogin").onclick(function(){
     	alert("sssssss");
     }); */
+    function changePwd() {
+		/* var user = $.session("loginUser");
+    	$('#phone').val(user.phoneNumber);
+    	$('#pwd').val(user.password); */
+    	$('#myModal').modal('show')
+    }
+    function OkPwd () {
+    	console.log($('#pwd').val())
+    	var phone = $('#phone').val();
+    	var pwd = $('#pwd').val();
+		$.ajax({
+			  type: 'POST',
+			  url: "changePwd",
+			  data:{
+			    phone:phone,
+			    pwd:pwd
+			  },
+			  success: function(data){
+				  if(data.code === 0){
+					  // 刷新表格
+					 // $('#tt').datagrid("reload");
+					  window.alert('修改密码成功' );
+					  setTimeout("window.location.href='exit'", 1000);
+					 
+				  }else {
+					  alert('修改密码失败：' + data.msg)
+				  }
+			  },
+			  error: function(){
+			    alert('更新状态失败')
+			  }
+		});
+    }
      function exit(){
     	alert("haole");
-    	/* 	$.ajax({
-			    url: "/exitLogin",
-			    type:'GET', //GET
-			   // async:true,    //或false,是否异步异步请求（同步请求将会锁住浏览器，用户其他操作必须等待请求完成才可以执行）
-			    data:data1, 
-			    timeout:5000,    //超时时间
-			    dataType:'text',    //返回的数据格式：json/xml/html/script/jsonp/text
-			    success:function(data){		
-			    	
-			    },
-			    error:function(){
-			    }
-			})*/
+    	
     } 
     jQuery(document).ready(function() {
         // var identity = $.session("identity");

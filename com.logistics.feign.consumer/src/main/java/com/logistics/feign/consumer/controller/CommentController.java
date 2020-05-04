@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.logistics.common.domain.User;
 import com.logistics.feign.consumer.feign.UserFeignClient;
+import com.logistics.util.R;
 
 @RestController
 public class CommentController {
@@ -39,7 +40,10 @@ public class CommentController {
 //		return userFeignClient.getUser();
 //	}
 
-
+	@PostMapping(value = "changePwd")
+	public R changePwd(@RequestBody @RequestParam("phone") String name,@RequestParam("pwd") String pwd) {
+		return userFeignClient.changePwd(name, pwd);
+	}
 
 	/**
 	 * 登陆验证   session添加
